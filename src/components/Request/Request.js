@@ -5,6 +5,7 @@ import styles from './Request.css';
 // eslint-disable-next-line react/prop-types
 const RadioButtonGroup = ({ name, onChange, children }) => {
   const radioButtonsWithNameAndChange = React.Children.map(children, child => {
+    // copy the radiobutton child and added additional props
     return React.cloneElement(child, {
       name,
       onChange
