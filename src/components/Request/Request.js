@@ -2,24 +2,41 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Request.css';
 
+// eslint-disable-next-line react/prop-types
+const RadioButtonGroup = ({ name, onChange, children }) => {
+  const radioButtonsWithNameAndChange = React.Children.map(children, child => {
+    return React.cloneElement(child, {
+      name,
+      onChange
+    });
+  });
+
+  return (
+    <>
+      { radioButtonsWithNameAndChange }
+    </>
+  );
+};
+
+// eslint-disable-next-line react/prop-types
+const RadioButton = ({ name, value, onChange }) => (
+  <>
+    <input id={value} type="radio" name={name} value={value} onChange={onChange}/>
+    <label htmlFor={value}>{value}</label>
+  </>
+);
+
 const Request = ({ url, onURLChange, body, onBodyChange, onMethodChange, onSubmit }) => (
   <form className={styles.Request} onSubmit={onSubmit}>
     <input type="text" value={url} onChange={onURLChange}/>
     
-    <input id="POST" type="radio" name="method" value="POST" onChange={onMethodChange}/>
-    <label htmlFor="POST">POST</label>
-
-    <input id="GET" type="radio" name="method" value="GET" onChange={onMethodChange}/>
-    <label htmlFor="GET">GET</label>
-
-    <input id="PATCH" type="radio" name="method" value="PATCH" onChange={onMethodChange}/>
-    <label htmlFor="PATCH">PATCH</label>
-
-    <input id="PUT" type="radio" name="method" value="PUT" onChange={onMethodChange}/>
-    <label htmlFor="PUT">PUT</label>
-
-    <input id="DELETE" type="radio" name="method" value="DELETE" onChange={onMethodChange}/>
-    <label htmlFor="DELETE">DELETE</label>
+    <RadioButtonGroup name="method" onChange={onMethodChange}>
+      <RadioButton value="POST" />
+      <RadioButton value="GET" />
+      <RadioButton value="PATCH" />
+      <RadioButton value="PUT" />
+      <RadioButton value="DELETE" />
+    </RadioButtonGroup>
     
     <textarea value={body} onChange={onBodyChange}></textarea>
     <button>Go</button>

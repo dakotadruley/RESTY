@@ -1,6 +1,9 @@
 import React from 'react';
+import Request from '../Request/Request.js';
 
 export default function App() {
-  return <h1>Hello World</h1>;
+  return (
+    <Request />
+  );
 }
   
