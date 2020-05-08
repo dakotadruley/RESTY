@@ -1,9 +1,14 @@
-// export const makeRequest = (url, method, body) => {
-//   return fetch(url, {
-//     method,
-//     body: check method ? body : null 
-//     // only if POST/PATCH?PUT with ternary
-//   })
-//   .then(res => res.json()
-//   .then(...)
-//   )};
+const BODY_METHODS = ['POST', 'PUT', 'PATCH'];
+
+export const makeRequest = (url, method, body) => {
+  return fetch(url, {
+    method,
+    body: BODY_METHODS.includes(method) ? body : null,
+    headers: {
+      'Content-Type': BODY_METHODS.includes(method) && 'application/json'
+    }
+  })
+    .then(res => res.json());
+};
+
+// if this is truthy add a body there 

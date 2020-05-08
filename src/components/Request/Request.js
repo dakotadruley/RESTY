@@ -5,7 +5,6 @@ import styles from './Request.css';
 // eslint-disable-next-line react/prop-types
 const RadioButtonGroup = ({ name, onChange, children }) => {
   const radioButtonsWithNameAndChange = React.Children.map(children, child => {
-    // copy the radiobutton child and added additional props
     return React.cloneElement(child, {
       name,
       onChange
@@ -27,11 +26,11 @@ const RadioButton = ({ name, value, onChange }) => (
   </>
 );
 
-const Request = ({ url, onURLChange, body, onBodyChange, onMethodChange, onSubmit }) => (
+const Request = ({ url, onChange, body, onSubmit }) => (
   <form className={styles.Request} onSubmit={onSubmit}>
-    <input type="text" value={url} onChange={onURLChange}/>
+    <input type="text" value={url} onChange={onChange}/>
     
-    <RadioButtonGroup name="method" onChange={onMethodChange}>
+    <RadioButtonGroup name="method" onChange={onChange}>
       <RadioButton value="POST" />
       <RadioButton value="GET" />
       <RadioButton value="PATCH" />
@@ -39,7 +38,7 @@ const Request = ({ url, onURLChange, body, onBodyChange, onMethodChange, onSubmi
       <RadioButton value="DELETE" />
     </RadioButtonGroup>
     
-    <textarea value={body} onChange={onBodyChange}></textarea>
+    <textarea value={body} onChange={onChange}></textarea>
     <button>Go</button>
   </form>
 );
@@ -48,9 +47,7 @@ Request.propTypes = {
   url: PropTypes.string.isRequired,
   method: PropTypes.string.isRequired,
   body: PropTypes.object.isRequired,
-  onURLChange: PropTypes.func.isRequired,
-  onMethodChange: PropTypes.func.isRequired,
-  onBodyChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 };
 
