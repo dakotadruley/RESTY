@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { makeRequest } from '../../services/makeRequest.js';
 import Request from '../../components/Request/Request.js';
-// import Response from '../';
+import Response from '../../components/Response/Response.js';
 
 const Resty = () => {
   const [url, setURL] = useState('');
   const [method, setMethod] = useState('POST');
   const [body, setBody] = useState('');
-  const [response, setResponse] = useState([]);
+  const [response, setResponse] = useState({});
 
   const handleChange = ({ target }) => {
     if(target.value === 'url')setURL(target.value);

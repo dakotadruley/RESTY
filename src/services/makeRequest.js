@@ -11,4 +11,3 @@ export const makeRequest = (url, method, body) => {
     .then(res => res.json());
 };
 
-// if this is truthy add a body there 
