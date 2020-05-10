@@ -28,7 +28,7 @@ const RadioButton = ({ name, value, onChange }) => (
 
 const Request = ({ url, onChange, body, onSubmit }) => (
   <form className={styles.Request} onSubmit={onSubmit}>
-    <input type="text" value={url} onChange={onChange}/>
+    <input type="text" name="url" value={url} onChange={onChange}/>
     
     <RadioButtonGroup name="method" onChange={onChange}>
       <RadioButton value="POST" />
@@ -38,7 +38,7 @@ const Request = ({ url, onChange, body, onSubmit }) => (
       <RadioButton value="DELETE" />
     </RadioButtonGroup>
     
-    <textarea value={body} onChange={onChange}></textarea>
+    <textarea name={body} value={body} onChange={onChange}></textarea>
     <button>Go</button>
   </form>
 );
@@ -46,7 +46,7 @@ const Request = ({ url, onChange, body, onSubmit }) => (
 Request.propTypes = {
   url: PropTypes.string.isRequired,
   method: PropTypes.string.isRequired,
-  body: PropTypes.object.isRequired,
+  body: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 };
